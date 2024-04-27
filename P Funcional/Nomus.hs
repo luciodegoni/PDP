@@ -20,8 +20,8 @@ nomu1= UnNomus True True 3 "Oscuro" 40
 
 entrenar :: Int -> Nomus
 entrenar tiempo nomu= UnNomus {
-    ojos= ojos nomu,
+    cantOjos= ojos nomu,
     alas= alas nomu,
     fuerza= fuerza nomu + tiempo,
-    brazos= True
+    brazosMul= True
 }
