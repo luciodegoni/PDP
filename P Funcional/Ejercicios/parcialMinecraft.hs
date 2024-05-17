@@ -79,8 +79,10 @@ hacha = last
 espada :: Herramienta
 espada = head
 
--- pico ??
-
+-- map (!!2) ["hola", "que", "tal"]
+pico :: Int -> Herramienta
+pico = flip (!!)
+-- pico n lista = lista !! n
 minar :: Herramienta -> Bioma -> Personaje -> Personaje
 minar herramienta bioma personaje 
     | tieneMaterial personaje (materialNecesario bioma) = agregarObjeto (herramienta (materialesDelBioma bioma)) (cambiarPuntos 50 personaje)
