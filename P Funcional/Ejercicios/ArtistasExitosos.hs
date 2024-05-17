@@ -23,7 +23,11 @@ calificacion cancion = length (filter (\c -> c `elem` ['a'..'z']) cancion) + 10
 -- 2 Averiguar si es exitoso un artista, lo que sucede cuando la suma de las calificaciones buenas de las canciones de un artista es mayor a 50 
 -- (son buenas las que tienen calificacion mayor a 20)
 
-laCancionEsBuena :: Artista -> Int
-laCancionEsBuena artista = filter (>20) (\c -> canciones c) artista
--- esBueno :: Artista -> Bool
--- esBueno artista = filter (>20) (map (calificacion canciones artista))
+esExitoso:: Artista -> Bool
+esExitoso artista = sum (filter (>20) (map calificacion (canciones artista))) > 50
+
+
+-- 3 Obtener todos los artistas exitosos, a partir de un conjunto de artistas.
+
+artistasExitosos :: [Artista] -> [Artista]
+artistasExitosos = filter esExitoso
