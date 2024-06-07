@@ -2,9 +2,9 @@
 % Este es un comentario
 
 % Definimos algunos hechos
-hombre(juan).
-hombre(pedro).
-mujer(maria).
+hombre(lucio).
+hombre(valen).
+mujer(zoe).
 
 % Definimos una regla
 persona(X) :- hombre(X).
