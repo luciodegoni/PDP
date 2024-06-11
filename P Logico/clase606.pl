@@ -31,7 +31,7 @@ esEnemigo(Pais, OtroPais) :-
 esComplicado(Paism OtroPais):-
     sonLimitrofes(Pais1, Pais2),
     sonLimitrofes(Pais1, Pais3),
-    ocupa(Pais1, Color, Ejercitos1),
+    ocupa(Pais1, Color, _),
     ocupa(Pais2, Color, Ejercito2),
     ocupa(Pais3, Color, Ejercito3)
-    Ejercitos1 + Ejercito2 >= 5
+    Ejercitos1 + Ejercito2 >= 5.
