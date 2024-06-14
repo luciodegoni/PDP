@@ -1,5 +1,5 @@
 use_module(paises).
-usemodule(ocupacion).
+use_module(ocupacion).
 
 % Definición de sonLimitrofes
 sonLimitrofes(P1, P2) :- limita(P1, P2).
