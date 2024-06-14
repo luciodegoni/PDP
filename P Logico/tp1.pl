@@ -10,7 +10,7 @@ Elsa no juega esta partida. */
 tecnologia(herreria).
 tecnologia(forja).
 tecnologia(emplumado).
- teconologia(laminas).
+teconologia(laminas).
 tecnologia(fundicion).
 
 % Relación entre jugadores y sus tecnologías desarrolladas
@@ -67,8 +67,10 @@ alcanceGlobal(Tecnologia) :-
 (Una civilización alcanzó una tecnología cuando algún jugador de esa civilización la desarrolló).
 En los ejemplos, los romanos es una civilización líder pues entre Ana y Dimitri, que juegan con romanos, ya tienen todas las tecnologías que se alcanzaron.*/
 
-% alcanzoTodasLasTecnologias(Civilizacion) :-
-%     juega(_, Civilizacion),
-%     forall()
+alcanzoTecnologia(Civilizacion, Tecnologia):-
+    
+alcanzoTodasLasTecnologias(Civilizacion) :-
+     juega(_, Civilizacion),
+     forall(tecnologia(T), alcanzoTecnologia(Civilizacion, T)).
     
 
