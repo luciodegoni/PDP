@@ -68,7 +68,8 @@ alcanceGlobal(Tecnologia) :-
 En los ejemplos, los romanos es una civilización líder pues entre Ana y Dimitri, que juegan con romanos, ya tienen todas las tecnologías que se alcanzaron.*/
 
 alcanzoTecnologia(Civilizacion, Tecnologia):-
-    
+    desarrollo(_,Tecnologia),
+    juega(_,Civilizacion).
 alcanzoTodasLasTecnologias(Civilizacion) :-
      juega(_, Civilizacion),
      forall(tecnologia(T), alcanzoTecnologia(Civilizacion, T)).
