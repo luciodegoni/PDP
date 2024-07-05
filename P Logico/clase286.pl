@@ -64,8 +64,7 @@ L = [1, 2, 3, 4, 5, 6, 7, 8].
 
 %uso listas si es solo impredescible (si quiero usar length o suma)
 
-cabeza([X|Xs], X). 
-
+soloLaCabechona([X|Xs], X). 
 
 % Functores
 % En vez de modelar: persona(juan,bsas, 20, 1, 2000).
