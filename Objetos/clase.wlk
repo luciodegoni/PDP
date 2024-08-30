@@ -7,10 +7,10 @@ object pepita {
 
     method vola(metros){
         energia = energia- metros * 10
-    
+    }
+
     method comer(comida) {
         energia += comida.energia()
-    }
     }
 }
 
