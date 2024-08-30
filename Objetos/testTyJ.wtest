@@ -1,0 +1,11 @@
+import tomyJerry.*
+
+test "La velocidad maxima de Tom es 10 y su energia es 50"{
+    assert.equals(10, tom.velocidadMaxima ())
+    assert.equals(50, tom.energia())
+}
+
+test "Si come a Jerry, su velocidad maxima es 15.2 y su energia es 102"{
+    tom.comer(jerry)
+    
+}
