@@ -2,26 +2,41 @@ object tom {
     method energia() {return energia} // Hago un getter para Tom asi puedo ver la energia que tiene
     var energia = 50
     method correr(metros) {
-        energia -= metros / 2
+        energia -= self.energiaGastada(metros)
+    }
+    method energiaGastada(metros) = metros / 2
+
+    method energiaQueAporta(raton)
+    {
+        return 12 + raton.peso()
     }
     method comer(raton){
-        energia += 12 + raton.peso()
+        energia += self.energiaQueAporta(raton) 
     }
 
     method velocidadMaxima () {
         return 5 + energia / 10
+    }  
+
+    method puedeComer(distancia){
+    return energia >= self.energiaGastada(distancia)
     }
+
+    method quiereComer(distancia, raton){
+    return self.puedeComer(distancia) && self.energiaGastada(distancia) < self.energiaQueAporta(raton) 
+    }
+    
 }
 object jerry {
-    var edad = 2
+    var _edad = 2
     method peso(){
-        return edad * 20
+        return _edad * 20
     }
     //getter
-    method edad() {return edad}
+    method edad() {return _edad}
 
     // setter
-     method edad(_edad) {edad= _edad}
+     method edad(_edadNueva) {_edad= _edadNueva}
 }
 
 object nibbles {
