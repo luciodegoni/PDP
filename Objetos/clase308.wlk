@@ -1,6 +1,11 @@
 object pepita {
  var energia = 100
-
+    var position = game.at (1,8)
+    method position () = position
+    method position(newPos) {
+        position = newPos
+    }
+    method image() = "flappybird-unscreen.gif"
     method estaCansada(){
         return energia <20
     }
@@ -15,13 +20,26 @@ object pepita {
 }
 
 object alpiste {
+    var position= game.at(3, 6)
     method energia() = 5
+    method position () = position
+    method position(newPos) {
+        position = newPos
+        }
+    method eliminar(){
+        game.removeVisual(self)
+}
 }
 
 object manzana {
 	var madurez = 0
 	var pudrirse = 0
-
+    var position= game.at(12,10)
+    method image() = "manzanita.png"
+    method position () = position
+    method position(newPos) {
+        position = newPos
+    }
 	method energia() {
 		return 0.max((50 + 0.5 * madurez) - (pudrirse * 2))	
 	}
@@ -30,4 +48,7 @@ object manzana {
 		madurez += 10
         if(madurez < 100) madurez +=10 else pudrirse += 10
 	}
+    method eliminar(){
+        game.removeVisual(self)
+    }
 }
