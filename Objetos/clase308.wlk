@@ -1,18 +1,15 @@
 object pepita {
- var energia = 100
+    var energia = 100
     var position = game.at (1,8)
     method position () = position
     method position(newPos) {
         position = newPos
     }
     method image() = "flappybird-unscreen.gif"
-    // method image() = "flappybird-unscreen.gif"
-    method estaCansada(){
-        return energia <20
-    }
+    method estaCansada()= energia <= 20
 
     method vola(metros){
-        energia = energia- metros * 10
+        energia -= metros * 10
     }
 
     method comer(comida) {

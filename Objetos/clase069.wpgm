@@ -4,9 +4,9 @@ import wollok.game.*
 program PepitaJuego {
     // AMBIENTE
     game.title("Juego Pepita")
+    game.width(80)
     game.height(30)
     game.cellSize(30)
-    game.width(80)
     game.boardGround("fondoPepita.png")
 
     // VISUALES
@@ -31,18 +31,16 @@ program PepitaJuego {
         pepita.position(pepita.position().up(2))
     })
     keyboard.space().onPressDo({
-        game.say(pepita,
-            if(pepita.estaCansada())"Estoy cansado jefe"
-            else "Estoy para volar!"
-            )
+        if (pepita.estaCansada()) "Estoy cansado Jefe"
+        else "Estoy para volar"
     })
 
     game.onCollideDo(pepita, {objeto =>
         if(objeto.esComestible())  
         {
-            game.say(pepita, "Ñam")
+            game.say(pepita, "Que rico!")
             pepita.comer(objeto)
-            collidersPepita.first().delete()
+            objeto.delete()
         }
         else
         {
