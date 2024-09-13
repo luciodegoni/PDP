@@ -6,6 +6,7 @@ object pepita {
         position = newPos
     }
     method image() = "flappybird-unscreen.gif"
+    // method image() = "flappybird-unscreen.gif"
     method estaCansada(){
         return energia <20
     }
@@ -20,8 +21,10 @@ object pepita {
 }
 
 object alpiste {
-    var position= game.at(3, 6)
+    var position= game.at(18, 7)
+    method esComestible() = true
     method energia() = 5
+    method image() = "alpiste.png"
     method position () = position
     method position(newPos) {
         position = newPos
@@ -35,7 +38,8 @@ object manzana {
 	var madurez = 0
 	var pudrirse = 0
     var position= game.at(12,10)
-    method image() = "manzanita.png"
+    method esComestible() = true
+    method image() = "manzana.png"
     method position () = position
     method position(newPos) {
         position = newPos
@@ -50,5 +54,14 @@ object manzana {
 	}
     method eliminar(){
         game.removeVisual(self)
+    }
+}
+
+object nido {
+    var position= game.at(35,7)
+    method image()= "nido.png"
+    method position () = position
+    method position(newPos) {
+        position = newPos
     }
 }

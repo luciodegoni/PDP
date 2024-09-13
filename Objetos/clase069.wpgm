@@ -2,14 +2,25 @@ import clase308.*
 import wollok.game.*
 
 program PepitaJuego {
+    // AMBIENTE
     game.title("Juego Pepita")
     game.height(30)
     game.cellSize(30)
     game.width(80)
     game.boardGround("fondoPepita.png")
+
+    // VISUALES
     game.addVisual(pepita)
     game.addVisual(manzana)
     game.addVisual(alpiste)
+    game.addVisual(nido)
+
+    // PEPITA
+    var collidersPepita
+    game.onTick(50, "Colisiones", {
+        collidersPepita = game.colliders(pepita)
+    })
+    
     keyboard.right().onPressDo({
         pepita.position(pepita.position().right(2))
     })
@@ -25,12 +36,18 @@ program PepitaJuego {
             else "Estoy para volar!"
             )
     })
-     keyboard.c().onPressDo({
-        if(not game.colliders(pepita).isEmpty()) {
-            const colision = game.colliders(pepita).first()
-            pepita.comer(colision)
-            colision.delete()
-            game.say(pepita, "¡Qué rico!")
+
+    game.onCollideDo(pepita, {objeto =>
+        if(objeto.esComestible())  
+        {
+            game.say(pepita, "Ñam")
+            pepita.comer(objeto)
+            collidersPepita.first().delete()
+        }
+        else
+        {
+            game.say(pepita,"Gané")
+            game.schedule(200, {game.stop()})
         }
     })
     game.onTick(2000, "movimiento",{
