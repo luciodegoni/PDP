@@ -1,0 +1,31 @@
+import clase1309.*
+
+test "juanCruz consigue una carta"{
+    juanCruz.conseguirCarta(cartaCharizard)
+    assert.that(juanCruz.tieneCarta(cartaCharizard))
+}
+
+test "juanCruz no tiene la carta de pikachu"{
+    assert.notThat(juanCruz.tieneCarta(cartaPikachu))
+}
+
+test "juanCruz vendió una carta y ya no la tiene"{
+    juanCruz.conseguirCarta(cartaCharizard)
+    juanCruz.vender()
+    assert.notThat(juanCruz.tieneCarta(cartaCharizard))
+}
+
+test "al vender una carta la pierde pero gana dinero correspondiente al valor" {
+    juanCruz.conseguirCarta(cartaPikachu)
+    juanCruz.conseguirCarta(cartaCharizard)
+    juanCruz.conseguirCarta(cartaAnchoDeEspada)
+    juanCruz.vender()
+    assert.equals(cartaPikachu.valor(), juanCruz.cuantaPlataTenes())
+    assert.notThat(juanCruz.tieneCarta(cartaPikachu))
+    juanCruz.vender()
+    assert.equals(cartaCharizard.valor(), juanCruz.cuantaPlataTenes())
+    assert.notThat(juanCruz.tieneCarta(cartaCharizard))
+    juanCruz.vender()
+    assert.equals(cartaAnchoDeEspada.valor(), juanCruz.cuantaPlataTenes())
+    assert.that(juanCruz.tieneCarta(cartaAnchoDeEspada))
+}
