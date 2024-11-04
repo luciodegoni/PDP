@@ -1,0 +1,23 @@
+import parcialPlanetas.*
+import modelados.*
+
+describe "Pruebas planeta Tierra"{
+
+    test "La delegacion diplomática está formada por tres personas del planeta"{
+        const lista = tierra.delegacionDiplomatica()
+        assert.equals(3,lista.size())
+    }
+
+    test "El planeta tierra es valioso"{
+        assert.that(tierra.esValioso())
+    }
+
+    test "Saturno no es valioso"{
+        assert.notThat(saturno.esValioso())
+    }
+
+    test "Si Nacho gana plata, la delegacion diplomática estará formada por 4 personas"{
+        nacho.modificarCantMonedas(20)
+        assert.that(tierra.delegacionDiplomatica().size() == 4)
+    }
+}

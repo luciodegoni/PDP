@@ -1,0 +1,195 @@
+import armas.*
+import guerreros.*
+import origenes.*
+import zonas.*
+
+describe "Test de Gandalf"{
+    //const gandalf = new Maiar(vida = 100)
+    test "Poder de Gandalf con toda la vida y todas sus armas"{
+        gandalf.conseguirArma(baculo)
+        gandalf.conseguirArma(glamdring)
+        console.println(gandalf.poder())
+        assert.equals(2800, gandalf.poder())
+    }
+
+    test "Poder de Gandalf sin armas y con 80 de vida"{
+        gandalf.vida(80)
+        assert.equals(1200, gandalf.poder())
+    }
+
+    test "Poder de Gandalf con 5 de vida y su báculo"{
+        gandalf.vida(5)
+        gandalf.conseguirArma(baculo)
+        assert.equals(2300, gandalf.poder())
+    }
+
+    test "Poder de Gandalf con 30 de vida, su báculo y su espada pero versión enana"{
+        gandalf.vida(30)
+        gandalf.conseguirArma(baculo)
+        glamdring.origen(razaEnano)
+        gandalf.conseguirArma(glamdring)
+        assert.equals(1650, gandalf.poder())
+    }
+}
+
+describe "Test caminos y lugares" {
+
+    test "Gandalf full vida y con sus armas, puede atravesar Minas Tirith"{ // Extra
+        gandalf.conseguirArma(baculo)
+        gandalf.conseguirArma(glamdring)
+        assert.that(minasTirith.puedePasar(gandalf))
+    }
+    test "Gandalf full vida y con sus armas, puede atravesar Lebennin"{
+        gandalf.conseguirArma(baculo)
+        gandalf.conseguirArma(glamdring)
+        assert.that(lebennin.puedePasar(gandalf))
+    }
+
+    test "Gandalf sin armas y con 11 de vida NO puede atravesar Lebennin" { //Como no puede puse notThat
+        gandalf.vida(11)
+        assert.notThat(lebennin.puedePasar(gandalf))
+    }
+
+    test "Gandalf sin armas y con 11 de vida NO puede atravesar Minas Tirith" { //No puede
+        gandalf.vida(11)
+        assert.notThat(minasTirith.puedePasar(gandalf))
+    }
+
+    test "Gandalf full vida y con sus armas, puede atravesar el camino compuesto por Lebennin y Minas Tirith" {
+        gandalf.conseguirArma(baculo)
+        gandalf.conseguirArma(glamdring)
+        assert.that(gondor.puedePasar(gandalf))
+    }
+
+    test "Gandalf full vida y con sus armas, atraviesa el camino compuesto por Lebennin y Minas Tirith" {
+        gandalf.conseguirArma(baculo)
+        gandalf.conseguirArma(glamdring)
+        gondor.recorrer(gandalf)
+        assert.equals(90, gandalf.vida())
+    }
+}
+
+describe "Test de Tom Bombadil"{
+    test "Tom puede atravesar atravesar Lebennin"{
+        assert.that(lebennin.puedePasar(tomBombadil))
+    }
+
+    test "Tom atraviesa el camino que pasa por Gondor antes mencionado"{
+        const poderTomAntes = tomBombadil.poder()
+        const vidaTomAntes = tomBombadil.vida()
+        gondor.recorrer(tomBombadil)
+        assert.equals(poderTomAntes, tomBombadil.poder())
+        assert.equals(vidaTomAntes, tomBombadil.vida())
+    }
+}
+// Los origenes del enunciado del TP Parte 2 están dividios por 10, es decir, en vez de ser origenEnano = 200 ahora es 20
+// Conservamos los valores de los origenes del TP anterior para evitar problemas con los tests del TP anterior ya que es un error
+// en la continuación del enunciado
+
+//Por eso en algunos tests donde se esperaba 300 lo modificamos por 3000
+describe "Tests de Arsenal"{
+    test "Espada con multiplicador de 15 y llevada Enano"{
+        const espada = new Espada(multiplicador = 15)
+        const elEnano = object {method origen() = razaEnano}
+        assert.equals(300, espada.fuerza(elEnano))
+    }
+
+    test "Hacha con mango de 50 cm, con una hoja de 5kg" {
+        const hacha = new Hacha(largoMango = 50, pesoHoja = 5)
+        const elEnano = object {method origen() = razaEnano}
+        assert.equals(250, hacha.fuerza(elEnano))
+    }
+
+    test "Daga con multiplicador de 15 y llevada Enano" {
+    const elEnano = object {method origen() = razaEnano}
+    const dagaPrueba = new Daga(multiplicador = 15)
+    assert.equals(150, dagaPrueba.fuerza(elEnano))
+  }
+}
+
+describe "Test Guerreros" {
+  test "Poder de Frodo (sin items)" {
+    froddo.desarmar()
+    assert.equals(50,froddo.poder())
+  }
+
+  test "Poder de Gimli" {
+    assert.equals(2175,gimli.poder())
+  }
+
+  test "Poder de Légolas" {
+    assert.equals(980,legolas.poder())
+  }
+
+  test "Poder de Aragorn" {
+    assert.equals(102.25,aragorn.poder())
+  }
+
+  test "Poder de Gandalf" {
+    //consideramos full vida y sin armas porque el proximo test remarca el tener todas las armas
+    assert.equals(1500,gandalf.poder()) // con armas daria 2700
+  }
+
+  test "Gandalf con 9 de vida, y todas sus armas" {
+    gandalf.conseguirArma(new Baculo(poder = 400))
+    gandalf.conseguirArma(new Espada(multiplicador = 10))
+    gandalf.perderVida(91)
+    assert.equals(3900, gandalf.poder())
+  }
+
+  test "Poder de Légolas que obtiene medio punto de destreza propia" {
+    legolas.destrezaPropia(1.5)
+    assert.equals(1130,legolas.poder())
+  }
+}
+
+describe "Test Regiones" {
+  test "Un grupo formado únicamente por gimli puede atravesar el camino de gondor(lebennin,minasTirith,lossarnach)" {
+    // const miGrupo = new Grupo (grupo = [gimli])
+    const gondor = new Region(camino = [lebennin,minasTirith,lossarnach])
+    assert.that(gondor.puedePasar(gimli))
+  }
+
+  test "Un grupo formado por gimli y froddo no puede atravesar el camino de gondor(lebennin,minasTirith,lossarnach)" {
+    const miGrupo = new Grupo (grupo = [froddo,gimli])
+    const gondor = new Region(camino = [lebennin,minasTirith,lossarnach])
+    assert.notThat(gondor.puedePasar(miGrupo))
+  }
+
+  test "Un grupo formado por legolas y aragorn no puede atravesar el camino de gondor(lebennin,minasTirith,lossarnach)" {
+    const miGrupo = new Grupo (grupo = [legolas,aragorn])
+    const gondor = new Region(camino = [lebennin,minasTirith,lossarnach])
+    assert.notThat(gondor.puedePasar(miGrupo))
+  }
+
+  test "Un grupo formado por froddo, gimli, legolas y tomBombadil puede atravesar el camino de gondor(minasTirith,lossarnach)" {
+    const miGrupo = new Grupo (grupo = [legolas,froddo,gimli,tomBombadil])
+    const gondor = new Region(camino = [minasTirith,lossarnach])
+    assert.that(gondor.puedePasar(miGrupo))
+  }
+
+  test "Un grupo formado por froddo, gimli, legolas y gandalf no puede atravesar el camino de gondor(minasTirith,lossarnach)" {
+    const miGrupo = new Grupo (grupo = [legolas,froddo,gimli,gandalf])
+    const gondor = new Region(camino = [minasTirith,lossarnach])
+    assert.notThat(gondor.puedePasar(miGrupo))
+  }
+
+  test "Si lossarnach tiene como requerimientoElemento lembas 10 un grupo formado por froddo, gimli, legolas y tomBombadil puede pasar, cuenta con > 10 lembas" {
+    const miGrupo = new Grupo (grupo = [legolas,froddo,gimli,tomBombadil])
+    lossarnach.requerimientoExtra(lembas10)
+    assert.that(lossarnach.puedePasar(miGrupo))
+  }
+
+  test "Si lossarnach tiene como requerimientoElemento pociones 5 un grupo formado por froddo, gimli, legolas y tomBombadil puede pasar, cuenta con < 5 pociones" {
+    const miGrupo = new Grupo (grupo = [legolas,froddo,gimli,tomBombadil])
+    lossarnach.requerimientoExtra(pociones5)
+    assert.that(lossarnach.puedePasar(miGrupo))
+  }
+
+  test "Si lossarnach tiene como RequerimientoGuerrero que tenga mas de 2 armas un grupo formado por aragorn y gimli pueden pasar por una region formada por lossarnach y minasTirith" {
+    const miGrupo = new Grupo (grupo = [legolas,froddo,gimli,tomBombadil])
+    gondor.modificarCamino([lossarnach, minasTirith])
+    lossarnach.requerimientoExtra(masDe2Armas)
+    assert.that(lossarnach.puedePasar(miGrupo))
+  }
+}
