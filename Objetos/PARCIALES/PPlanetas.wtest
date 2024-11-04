@@ -21,3 +21,10 @@ describe "Pruebas planeta Tierra"{
         assert.that(tierra.delegacionDiplomatica().size() == 4)
     }
 }
+
+describe "Pruebas planeta Marte"{
+    test "Tom trabaja bien"{
+        tom.trabajar(marte, 10)
+        assert.that(marte.construcciones.contains(unaMuralla))
+    }
+}

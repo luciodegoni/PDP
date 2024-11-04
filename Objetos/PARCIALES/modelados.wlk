@@ -1,5 +1,7 @@
 import parcialPlanetas.*
 
+// PARTE 1
+
 //MODELADO PERSONAS
 const tino = new Persona(
     monedas = 100,
@@ -45,3 +47,21 @@ const tierra = new Planeta(
 const saturno = new Planeta(
     personas = [tino, lucho, nacho, lauti]
 )
+
+// PARTE 2
+
+//Modelado constructores
+
+const valen = new Constructor(edad= 20, cantConstrucciones = 6, region = "llanura")
+
+const tom = new Constructor(edad= 27, cantConstrucciones = 3, region = "montania")
+
+const mirko = new Constructor(edad= 20, cantConstrucciones = 2, region = "costa")
+
+//Modelado productores
+
+const nico = new Productor(edad =20, tecnicas = ["cultivo", "sembrado", "ganaderia", "mineria"])
+
+//Modelado nuevo planeta
+
+const marte = new Planeta(personas = [valen, tom, mirko, nico], construcciones = [])
