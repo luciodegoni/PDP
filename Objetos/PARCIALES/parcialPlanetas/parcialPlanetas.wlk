@@ -86,42 +86,18 @@ class Constructor inherits Persona{
     const property region
     override method recursos() = super() + 10*cantConstrucciones
     override method esDestacado() = cantConstrucciones > 5
-    method importanciaRecursos() {
-        if(self.recursos() < 200) {
-            return 1
-        }
-        else if(self.recursos() < 400) {
-            return 2
-        }
-        else if(self.recursos()< 600) {
-            return 3
-        }
-        else if(self.recursos()< 800){
-            return 4
-        }
-        else{
-            return 5
-        }
 
-    }
-    method trabajar(planeta, tiempo){
-        if(region == "montania"){
-            const unaMuralla = new Muralla(longitud = tiempo/2)
-            planeta.construcciones.add(unaMuralla)
-        }
-        else if (region == "costa"){
-            const unMuseo = new Museo(superficie = tiempo, importante = 1)
-            planeta.add(unMuseo)
-        }
-        else if (region == "llanura"){
-            if(self.esDestacado()){
-                const unMuseo = new Museo (superficie = tiempo, importante = self.importanciaRecursos())
-                planeta.add(unMuseo)
-            }
-            else{
-                const unaMuralla = new Muralla (longitud = tiempo/2)
-                planeta.add(unaMuralla)
-            }
-        }
-    }
+}
+
+object costa {
+
+}
+
+object montania {
+
+}
+
+
+object llanura {
+    
 }
