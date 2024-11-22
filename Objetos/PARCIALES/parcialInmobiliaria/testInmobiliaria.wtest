@@ -1,0 +1,9 @@
+import inmobiliaria.*
+
+describe "Test empleados"{
+    test "La comisión sobre alquiler 1 es 60"{
+        const alquiler1 = new Alquiler (valorInmueble= 50000, cantMesesContrato= 60)
+        
+        assert.equals(60, alquiler1.comision())
+    }
+}

@@ -1,0 +1,38 @@
+import qatar.*
+
+//Chef
+ const tin = new Cocinero(puesto= pastelero, requerimientoPlato = 6)
+
+//Platos
+ const papasFritas = new Entrada ()
+ const hamburguesa = new Principal (cantAzucar = 36, bonito = true)
+ const volcanDDL = new Postre (cantColores = 4)
+
+describe "Calorias de un Menu" {
+  test "Calorias de las papas fritas" {
+    assert.equals(100, papasFritas.cantidadCalorias()) 
+  }
+
+  test "Calorias de la hamburguesa" {
+    assert.equals(208, hamburguesa.cantidadCalorias())
+  }
+
+  test "Calorias del volcan de dulce de leche"{
+    assert.equals(460, volcanDDL.cantidadCalorias())
+  }
+}
+
+describe "Catar un menu"{
+
+  test "El volcan de dulce de leche catado por tin tiene un puntaje de 100"{
+    assert.equals(100, tin.catarPlato(volcanDDL))
+  }
+    
+}
+
+describe "Tin puede cambiar de rol"{
+  test "El rol de tin pasa de pastelero a chef"{
+    tin.ascender(chef)
+    assert.equals(chef, tin.puesto())
+  }
+}
